@@ -31,6 +31,7 @@ import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -126,14 +127,14 @@ export default function Navbar() {
           {/* Interfață Mobilă: Sheet */}
           <div className="flex md:hidden items-center space-x-2">
             <ThemeToggle className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-white/[0.08] transition-all focus:outline-none" />
-            <Sheet>
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger render={<button className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-white/[0.08] transition-all focus:outline-none flex items-center justify-center" />}>
                 <Menu className="w-5 h-5" />
                 <span className="sr-only">Deschide meniul</span>
               </SheetTrigger>
               <SheetContent side="right" className="w-[85vw] sm:w-[350px] backdrop-blur-xl bg-white/95 dark:bg-slate-950/95 border-slate-200 dark:border-white/[0.08] p-6 flex flex-col">
                 <SheetTitle>
-                  <Link href="/" className="flex items-center space-x-3 group relative mb-8">
+                  <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center space-x-3 group relative mb-8">
                     <div className="bg-blue-500/10 dark:bg-violet-500/10 blur-xl absolute -z-10 w-14 h-14 rounded-full left-0 top-1/2 -translate-y-1/2" />
                     <div className="relative w-10 h-10 flex items-center justify-center">
                       <svg className="w-10 h-10 animate-[spin_10s_linear_infinite]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -158,6 +159,7 @@ export default function Navbar() {
                       <Link
                         key={link.href}
                         href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
                         className="group flex items-center gap-4 py-3 px-2 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-all border border-transparent hover:border-slate-100 dark:hover:border-slate-800"
                       >
                         <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-900/80 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
