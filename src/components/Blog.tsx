@@ -7,29 +7,29 @@ import Link from "next/link";
 export default function Blog() {
   const articles = [
     {
-      title: "Cum îți dai seama că laptopul tău are nevoie de o curățare de praf?",
-      desc: "Zgomotul puternic al ventilatorului, supraîncălzirea carcasei și opririle subite în timpul jocurilor sunt semnale clare că sistemul tău de răcire este blocat de praf.",
-      date: "15 Mai 2026",
+      title: "De ce un site rapid îți aduce mai mulți clienți în 2026?",
+      desc: "Descoperă impactul vitezei de încărcare asupra ratei de conversie. Un site web optimizat nu doar că arată bine, dar îți transformă vizitatorii în clienți fideli.",
+      date: "12 Iulie 2026",
+      author: "Echipa Omnivo",
+      readTime: "4 min citire",
+      category: "Web Design",
+    },
+    {
+      title: "Cât de importantă este o instalare Windows pe curat?",
+      desc: "Multe erori și încetiniri ale PC-ului tău pot fi rezolvate definitiv printr-o instalare profesională a sistemului de operare, completată de setările și driverele corecte.",
+      date: "28 Iunie 2026",
       author: "Echipa Tech",
       readTime: "3 min citire",
-      category: "Mentenanță",
+      category: "Sisteme de Operare",
     },
     {
-      title: "De ce merită să faci trecerea de la HDD la un SSD rapid?",
-      desc: "Descoperă diferența uriașă de viteză și cum un simplu upgrade la un SSD SATA sau NVMe poate face un laptop vechi de 5 ani să pornească în mai puțin de 15 secunde.",
-      date: "08 Mai 2026",
-      author: "Echipa Tech",
-      readTime: "4 min citire",
-      category: "Upgrade",
-    },
-    {
-      title: "Ghid practic: Cum previi infectarea cu viruși pe Windows 11",
-      desc: "Sfaturi esențiale despre navigarea sigură, importanța actualizărilor sistemului și de ce Windows Defender, configurat corespunzător de noi, este de ajuns pentru utilizatorii obișnuiți.",
-      date: "28 Aprilie 2026",
-      author: "Echipa Software",
+      title: "Cum te ajută un design modern să câștigi încrederea clienților?",
+      desc: "În mediul online, prima impresie contează enorm. Află cum un design responsive, sigur și cu o interfață intuitivă reflectă profesionalismul afacerii tale.",
+      date: "15 Iunie 2026",
+      author: "Echipa Omnivo",
       readTime: "5 min citire",
-      category: "Securitate",
-    },
+      category: "Business Online",
+    }
   ];
 
   return (
@@ -39,13 +39,13 @@ export default function Blog() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-3">
-            Blog IT &amp; Sfaturi
+            Noutăți &amp; Sfaturi
           </h2>
           <h3 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
             Articole și ghiduri utile
           </h3>
           <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm sm:text-base">
-            Citește ultimele noastre articole despre cum să îți menții calculatorul rapid, securizat și să eviți defecțiunile hardware frecvente.
+            Descoperă secretele unui site web de succes, importanța optimizării SEO și de ce o mentenanță corectă a sistemului de operare îți salvează timp și bani.
           </p>
         </div>
 

@@ -8,38 +8,38 @@ export interface ReviewItem {
 
 export const reviewsData: ReviewItem[] = [
   {
-    author: "Urecheatu Constantin",
+    author: "Marius Dumitru",
     rating: 5,
-    text: "Mi-ați făcut mentenanța la laptop și temperatura acum este foarte OK. Un laptop Asus. Foarte buni și ieftini, multumesc Omnivo!",
-    device: "Laptop Asus",
+    text: "Am colaborat pentru un magazin online și rezultatul a fost peste așteptări. Design modern, super rapid și foarte ușor de folosit pentru clienți. Vânzările au crescut vizibil încă din prima lună! Multumesc Omnivo!",
+    device: "Magazin Online PRO",
     date: "Acum o săptămână"
   },
   {
     author: "Bărbieru Alex",
     rating: 5,
-    text: "Super servicii !!! Prima data când merg intr-un service cu laptopul și sunt in totalitate mulțumit și plec si cu un zâmbet in coltul gurii. Profesionalism, rapiditate si personal de nota 11. Recomand din toata inima !!!",
-    device: "Reparație Laptop",
+    text: "Băieții mi-au reinstalat Windows-ul după ce mă chinuiam de luni de zile cu erori și reclame enervante. Acum PC-ul merge impecabil, ca în prima zi. Profesionalism, rapiditate și comunicare de nota 10.",
+    device: "Instalare Windows",
     date: "Acum 2 săptămâni"
   },
   {
-    author: "Mika IsituorMatindoMaria",
+    author: "Elena Vasilescu",
     rating: 5,
-    text: "Reparație rapidă, am primit laptopul in 40 min pentru inlocuirea display comandat! Lucrarea are garantie si e impecabila avand in vedere cum arata laptopul trantit pe jos de mine.",
-    device: "Înlocuire Display",
+    text: "Super servicii! Aveam nevoie rapidă de un site de prezentare pentru noul meu cabinet. Au înțeles exact ce îmi doresc și mi-au livrat un site superb, responsive și optimizat pe Google.",
+    device: "Pachet Prezentare Basic",
     date: "Acum o lună"
   },
   {
     author: "Jean Pop",
     rating: 5,
-    text: "Serviciu foarte bun si rapid. Echipa a ridicat laptopul de la destiantie si au reusit sa rezolve problema intr-un timp scurt. De asemenea transmiterea informatiilor si a costurilor a fost facuta profesionist. II recomand cu caldura.",
-    device: "Serviciu Pick-Up & Return",
+    text: "O echipă foarte serioasă. Au preluat laptopul meu de gaming, au făcut mentenanța necesară și mi-au instalat un Windows perfect optimizat pentru jocuri. FPS-urile au crescut vizibil! Îi recomand cu căldură.",
+    device: "Windows Optimizat Gaming",
     date: "Acum 3 luni"
   },
   {
     author: "Dan Panduru",
     rating: 5,
-    text: "Buna seara! Am venit la dvs in magazin cu laptopul Asus care se restarta imediat ce ma conectam la zoom. Soluția dvs a fost salvatoare ptr copiii mei care stau pe lectii on line de 4 zile. Credeam ca va trebui sa cumparam alt laptop dar solutia oferita de dvs ne a scutit de multi bani. Multumesc!",
-    device: "Reparație Placă de Bază",
+    text: "Profesioniști desăvârșiți. Platforma web dezvoltată de ei ne-a automatizat o bună parte din procesele cu clienții. Recomand din toată inima Omnivo oricărei afaceri care vrea să treacă la nivelul următor.",
+    device: "Dezvoltare Web Custom",
     date: "Acum 4 luni"
   }
 ];

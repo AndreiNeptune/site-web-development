@@ -26,9 +26,7 @@ const AppointmentSchema = z.object({
     .regex(/^(07[0-9]{8})$/, {
       message: "Introduceți un număr de telefon valid în formatul 07xxxxxxxx (10 cifre)",
     }),
-  dispozitiv: z.enum(["laptop", "calculator", "altul"], {
-    message: "Vă rugăm să selectați un tip de dispozitiv valid",
-  }),
+
   serviciu: z
     .string()
     .min(3, { message: "Vă rugăm să selectați sau să descrieți serviciul dorit" }),
@@ -40,7 +38,7 @@ export type AppointmentState = {
   errors?: {
     nume?: string[];
     telefon?: string[];
-    dispozitiv?: string[];
+
     serviciu?: string[];
     mesaj?: string[];
   };
@@ -60,7 +58,7 @@ export async function submitAppointment(
       const rawData = {
         nume: formData.get("nume"),
         telefon: formData.get("telefon"),
-        dispozitiv: formData.get("dispozitiv"),
+
         serviciu: formData.get("serviciu"),
         mesaj: formData.get("mesaj") || undefined,
       };
@@ -83,7 +81,7 @@ export async function submitAppointment(
             {
               nume: validatedFields.data.nume,
               telefon: validatedFields.data.telefon,
-              dispozitiv: validatedFields.data.dispozitiv,
+
               serviciu: validatedFields.data.serviciu,
               mesaj: validatedFields.data.mesaj,
               status: "nou"
@@ -104,7 +102,7 @@ export async function submitAppointment(
             <h2>Programare nouă din website</h2>
             <p><strong>Nume:</strong> ${escapeHtml(validatedFields.data.nume)}</p>
             <p><strong>Telefon:</strong> ${escapeHtml(validatedFields.data.telefon)}</p>
-            <p><strong>Dispozitiv:</strong> ${escapeHtml(validatedFields.data.dispozitiv)}</p>
+
             <p><strong>Serviciu:</strong> ${escapeHtml(validatedFields.data.serviciu)}</p>
             <p><strong>Mesaj adițional:</strong> ${validatedFields.data.mesaj ? escapeHtml(validatedFields.data.mesaj) : "N/A"}</p>
           `,

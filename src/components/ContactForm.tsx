@@ -18,9 +18,7 @@ const FormSchema = z.object({
     .regex(/^(07[0-9]{8})$/, {
       message: "Numărul de telefon trebuie să fie de forma 07xxxxxxxx (10 cifre)",
     }),
-  dispozitiv: z.enum(["laptop", "calculator", "altul"], {
-    message: "Vă rugăm să selectați un tip de dispozitiv",
-  }),
+
   serviciu: z
     .string()
     .min(3, { message: "Vă rugăm să selectați sau să introduceți serviciul" }),
@@ -43,7 +41,7 @@ export default function ContactForm() {
     defaultValues: {
       nume: "",
       telefon: "",
-      dispozitiv: "laptop",
+
       serviciu: "",
       mesaj: "",
     },
@@ -55,7 +53,7 @@ export default function ContactForm() {
       const formData = new FormData();
       formData.append("nume", data.nume);
       formData.append("telefon", data.telefon);
-      formData.append("dispozitiv", data.dispozitiv);
+
       formData.append("serviciu", data.serviciu);
       if (data.mesaj) formData.append("mesaj", data.mesaj);
 
@@ -63,14 +61,14 @@ export default function ContactForm() {
       setState(result);
       if (result.success) {
         posthog.capture("contact_form_submitted", {
-          dispozitiv: data.dispozitiv,
+
           serviciu: data.serviciu,
           has_message: !!data.mesaj,
         });
         reset();
       } else {
         posthog.capture("contact_form_failed", {
-          dispozitiv: data.dispozitiv,
+
           serviciu: data.serviciu,
           error_message: result.message || "Unknown error",
         });
@@ -79,10 +77,11 @@ export default function ContactForm() {
   };
 
   const commonServices = [
-    "Diagnosticare Completă",
-    "Instalare Windows / OS",
-    "Curățare Praf + Schimbare Pastă Termică",
-    "Recuperare Date Pierdute",
+    "Creare Site de Prezentare",
+    "Creare Magazin Online (eCommerce)",
+    "Re-design Site Existent",
+    "Mentenanță & Administrare Web",
+    "Instalare Windows & Optimizare PC",
     "Alt Serviciu (Detaliez în mesaj)",
   ];
 
@@ -99,7 +98,7 @@ export default function ContactForm() {
             Trimite o solicitare
           </h3>
           <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm sm:text-base">
-            Completează formularul de mai jos și echipa noastră te va contacta în cel mai scurt timp (de obicei sub 30 de minute) pentru a confirma programarea în service sau vizita la domiciliu.
+            Completează formularul de mai jos și te vom contacta în cel mai scurt timp pentru a discuta detaliile proiectului tău Web sau pentru programarea instalării Windows.
           </p>
         </div>
 
@@ -188,61 +187,34 @@ export default function ContactForm() {
 
             </div>
 
-            {/* Grid Container Device Type + Desired Service */}
-            <div className="grid md:grid-cols-2 gap-6">
-
-              {/* Device Type Select */}
-              <div className="space-y-2">
-                <label htmlFor="dispozitiv" className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                  Tip Dispozitiv *
-                </label>
-                <select
-                  id="dispozitiv"
-                  disabled={isPending}
-                  {...register("dispozitiv")}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                >
-                  <option value="laptop">💻 Laptop</option>
-                  <option value="calculator">🖥️ Calculator (Desktop PC)</option>
-                  <option value="altul">⚙️ Altul (Componentă / Periferic)</option>
-                </select>
-                {errors.dispozitiv && (
-                  <p className="text-xs font-semibold text-rose-500 flex items-center gap-1">
-                    <AlertCircle className="w-3.5 h-3.5" /> {errors.dispozitiv.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Desired Service Select/Input */}
-              <div className="space-y-2">
-                <label htmlFor="serviciu" className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                  Serviciu Solicitat *
-                </label>
-                <input
-                  list="services-list"
-                  id="serviciu"
-                  placeholder="Selectează sau scrie serviciul"
-                  disabled={isPending}
-                  {...register("serviciu")}
-                  className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none focus:ring-2 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white transition-all ${
-                    errors.serviciu
-                      ? "border-rose-500 focus:ring-rose-500"
-                      : "border-slate-200 dark:border-slate-800 focus:ring-blue-500"
-                  }`}
-                  aria-invalid={errors.serviciu ? "true" : "false"}
-                />
-                <datalist id="services-list">
-                  {commonServices.map((srv, idx) => (
-                    <option key={idx} value={srv} />
-                  ))}
-                </datalist>
-                {errors.serviciu && (
-                  <p className="text-xs font-semibold text-rose-500 flex items-center gap-1">
-                    <AlertCircle className="w-3.5 h-3.5" /> {errors.serviciu.message}
-                  </p>
-                )}
-              </div>
-
+            {/* Desired Service Select/Input */}
+            <div className="space-y-2">
+              <label htmlFor="serviciu" className="text-sm font-bold text-slate-700 dark:text-slate-300">
+                Serviciu Solicitat *
+              </label>
+              <input
+                list="services-list"
+                id="serviciu"
+                placeholder="Selectează sau scrie serviciul"
+                disabled={isPending}
+                {...register("serviciu")}
+                className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none focus:ring-2 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white transition-all ${
+                  errors.serviciu
+                    ? "border-rose-500 focus:ring-rose-500"
+                    : "border-slate-200 dark:border-slate-800 focus:ring-blue-500"
+                }`}
+                aria-invalid={errors.serviciu ? "true" : "false"}
+              />
+              <datalist id="services-list">
+                {commonServices.map((srv, idx) => (
+                  <option key={idx} value={srv} />
+                ))}
+              </datalist>
+              {errors.serviciu && (
+                <p className="text-xs font-semibold text-rose-500 flex items-center gap-1">
+                  <AlertCircle className="w-3.5 h-3.5" /> {errors.serviciu.message}
+                </p>
+              )}
             </div>
 
             {/* Optional message field */}

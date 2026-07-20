@@ -193,11 +193,11 @@ export default function WebDesignPackages() {
           <div className="text-center mb-8">
             <h4 className="text-xl font-bold text-slate-900 dark:text-white">Toate pachetele includ standard:</h4>
           </div>
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {commonFeatures.map((feature, idx) => (
-              <div key={idx} className="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-400 px-4 py-2 rounded-full text-sm font-semibold">
-                {feature.icon}
-                {feature.text}
+              <div key={idx} className="flex items-center justify-center text-center gap-2 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-400 px-3 py-3 rounded-2xl text-xs sm:text-sm font-semibold hover:bg-emerald-100 dark:hover:bg-emerald-500/20 transition-colors">
+                <span className="shrink-0">{feature.icon}</span>
+                <span>{feature.text}</span>
               </div>
             ))}
           </div>

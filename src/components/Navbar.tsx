@@ -17,12 +17,6 @@ const getMobileIcon = (label: string) => {
 };
 
 const getBadge = (label: string) => {
-  if (label === "Windows") return (
-    <div className="ml-auto flex items-center gap-2">
-      <span className="bg-gradient-to-r from-pink-500 to-purple-500 text-white text-[9px] font-black tracking-wider uppercase px-2 py-1 rounded-lg shadow-md shadow-pink-500/20">Top Choice</span>
-      <ArrowRight className="w-4 h-4 text-slate-300 dark:text-slate-700 group-hover:translate-x-1 transition-transform" />
-    </div>
-  );
   return <ArrowRight className="ml-auto w-4 h-4 text-slate-300 dark:text-slate-700 group-hover:translate-x-1 transition-transform" />;
 };
 import { Button, buttonVariants } from "@/components/ui/button";
