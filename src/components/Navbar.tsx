@@ -112,9 +112,10 @@ export default function Navbar() {
           {/* Dreapta: CTA Cristal & Theme Toggle */}
           <div className="hidden md:flex items-center space-x-4">
             <ThemeToggle className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-white/[0.08] transition-all focus:outline-none" />
-            <Link href="/contact" className={buttonVariants({ variant: "default", className: "group rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium shadow-lg shadow-indigo-500/10 h-10 px-5 text-sm transition-all duration-300" })}>
-              Pick-up & Return Gratuit
-              <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform duration-200" />
+            <Link href="/contact" className="relative group flex items-center justify-center gap-2 h-10 px-5 sm:px-6 rounded-full bg-gradient-to-r from-blue-600 to-violet-600 text-white font-semibold text-sm transition-all duration-300 shadow-[0_4px_20px_-5px_rgba(79,70,229,0.4)] hover:shadow-[0_8px_25px_-5px_rgba(79,70,229,0.6)] hover:-translate-y-0.5 overflow-hidden">
+              <span className="relative z-10">Cere o Ofertă</span>
+              <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none" />
             </Link>
           </div>
 

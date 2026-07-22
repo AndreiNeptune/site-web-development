@@ -160,7 +160,7 @@ export default function WindowsHome() {
             <div className="mt-8 pt-6 border-t border-indigo-200 dark:border-purple-800/50 flex items-center justify-between relative z-10">
               <div>
                 <p className="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Tarif Gaming</p>
-                <p className="text-2xl font-black text-slate-900 dark:text-white">de la 250 RON</p>
+                <p className="text-2xl font-black text-slate-900 dark:text-white">de la 350 RON</p>
               </div>
               <Link
                 href="/contact"

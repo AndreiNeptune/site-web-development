@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Check } from "lucide-react";
+import { Plus, Check, Clock } from "lucide-react";
 import { motion, useSpring, useTransform, Variants } from "framer-motion";
 import Link from "next/link";
+import { PackageType } from "./WebDesignPricingSection";
 
 function AnimatedNumber({ value }: { value: number }) {
   const spring = useSpring(value, { bounce: 0, duration: 800 });
@@ -17,38 +18,164 @@ function AnimatedNumber({ value }: { value: number }) {
   return <motion.span>{display}</motion.span>;
 }
 
-export default function PricingCalculator() {
-  const [pages, setPages] = useState(1);
-  const [addons, setAddons] = useState({
-    contactForm: false,
-    cms: false,
-    languages: false,
-    logo: false,
+const PACKAGES_CONFIG = {
+  basic: {
+    title: "Prezentare Basic",
+    subtitle: "Fundația fiecărui site",
+    basePrice: 300,
+    baseHours: 30,
+    slider: {
+      title: "Număr de Pagini",
+      description: "Câte pagini va avea site-ul tău?",
+      min: 1,
+      max: 20,
+      unit: "pagină",
+      unitPlural: "pagini",
+      stepPrice: 100,
+      stepHours: 5,
+      footerText: ["1 (Bază)", "+100€ / pagină adiacentă", "20 max"]
+    },
+    features: [
+      { title: "Design Personalizat", desc: "Adaptat brandului și audienței tale" },
+      { title: "Optimizare Mobile & Desktop", desc: "Responsive pe toate dispozitivele" },
+      { title: "Animații & Interacțiuni", desc: "Interfață fluidă și modernă" },
+      { title: "Viteză de Încărcare & SEO", desc: "Performanță ridicată pe Google" },
+      { title: "Pagini Legale", desc: "Termeni și condiții, GDPR, Cookies" },
+    ],
+    addons: [
+      { id: "addon1", title: "Formular de Contact", desc: "Trimitere mesaje direct pe email sau WhatsApp.", price: 50, hours: 5 },
+      { id: "addon2", title: "Content Management (Panou Admin)", desc: "Editezi singur textul și imaginile fără cunoștințe tehnice.", price: 500, hours: 15 },
+      { id: "addon3", title: "Mai Multe Limbi", desc: "Suport multilingv (ex: Română / Engleză).", price: 200, hours: "dynamic", hoursBase: 1, hoursPerSliderStep: 0.5 },
+      { id: "addon4", title: "Logo & Branding", desc: "Identitate vizuală completă și logo profesional.", price: 600, hours: 15 },
+    ]
+  },
+  pro: {
+    title: "Magazin Online PRO",
+    subtitle: "Platformă completă de eCommerce",
+    basePrice: 800,
+    baseHours: 80,
+    slider: {
+      title: "Produse Adăugate Inițial",
+      description: "Câte produse introducem noi pentru tine?",
+      min: 10,
+      max: 100,
+      unit: "produse",
+      unitPlural: "produse",
+      stepPrice: 5,
+      stepHours: 0.5,
+      footerText: ["10 (Bază)", "+5€ / produs suplimentar", "100 max"]
+    },
+    features: [
+      { title: "Design Personalizat eCommerce", desc: "Optimizat pentru conversii și vânzări" },
+      { title: "Catalog Produse & Categorii", desc: "Gestiune facilă a produselor și stocurilor" },
+      { title: "Integrare Plăți cu Cardul", desc: "Stripe, NETOPIA sau EuPlatesc" },
+      { title: "Generare AWB Automat", desc: "Integrare directă cu firmele de curierat" },
+      { title: "Viteză de Încărcare & SEO", desc: "Esențial pentru succesul magazinului" },
+    ],
+    addons: [
+      { id: "addon1", title: "Facturare Automată", desc: "Integrare SmartBill, FGO sau Oblio.", price: 150, hours: 10 },
+      { id: "addon2", title: "Sistem de Recenzii", desc: "Recenzii cu poze și rating pentru produse.", price: 100, hours: 5 },
+      { id: "addon3", title: "Mai Multe Limbi", desc: "Vânzări la nivel internațional.", price: 200, hours: "dynamic", hoursBase: 2, hoursPerSliderStep: 0.5 },
+      { id: "addon4", title: "Logo & Branding", desc: "Identitate vizuală completă și logo profesional.", price: 600, hours: 15 },
+    ]
+  },
+  custom: {
+    title: "Custom Web App",
+    subtitle: "Platformă la comandă",
+    basePrice: 1500,
+    baseHours: 150,
+    slider: {
+      title: "Număr de Ecrane (Screens)",
+      description: "Câte vizualizări distincte va avea aplicația?",
+      min: 1,
+      max: 20,
+      unit: "ecran",
+      unitPlural: "ecrane",
+      stepPrice: 150,
+      stepHours: 12,
+      footerText: ["1 (Bază)", "+150€ / ecran suplimentar", "20 max"]
+    },
+    features: [
+      { title: "Arhitectură Custom (React/Next.js)", desc: "Dezvoltare de la zero, performanță maximă" },
+      { title: "Design UX/UI Avansat (Figma)", desc: "Prototipare și design system complet" },
+      { title: "Bază de Date & API-uri", desc: "Stocare sigură și procesare rapidă" },
+      { title: "Sisteme de Conturi Utilizatori", desc: "Roluri multiple (Admin, Client, etc.)" },
+      { title: "Securitate Avansată", desc: "Protecție împotriva vulnerabilităților web" },
+    ],
+    addons: [
+      { id: "addon1", title: "Autentificare Avansată", desc: "2FA, Login cu Google/Facebook/Apple.", price: 300, hours: 20 },
+      { id: "addon2", title: "Panou Admin Complex", desc: "Grafice, statistici și rapoarte avansate.", price: 500, hours: 40 },
+      { id: "addon3", title: "Integrare API Extern", desc: "Conectare cu ERP, CRM sau alte servicii.", price: 400, hours: 30 },
+      { id: "addon4", title: "Logo & Branding", desc: "Identitate vizuală completă și logo profesional.", price: 600, hours: 15 },
+    ]
+  }
+};
+
+interface PricingCalculatorProps {
+  selectedPackage?: PackageType;
+}
+
+export default function PricingCalculator({ selectedPackage = "basic" }: PricingCalculatorProps) {
+  const config = PACKAGES_CONFIG[selectedPackage];
+  
+  const [sliderValue, setSliderValue] = useState(config.slider.min);
+  const [addons, setAddons] = useState<Record<string, boolean>>({
+    addon1: false,
+    addon2: false,
+    addon3: false,
+    addon4: false,
   });
 
-  const basePrice = 300;
-  const pagePrice = 100;
-
-  const addonPrices = {
-    contactForm: 50,
-    cms: 500,
-    languages: 200,
-    logo: 600,
-  };
+  // Reset state when package changes
+  useEffect(() => {
+    setSliderValue(config.slider.min);
+    setAddons({
+      addon1: false,
+      addon2: false,
+      addon3: false,
+      addon4: false,
+    });
+  }, [selectedPackage, config.slider.min]);
 
   const calculateTotal = () => {
-    let total = basePrice;
-    if (pages > 1) {
-      total += (pages - 1) * pagePrice;
+    let total = config.basePrice;
+    if (sliderValue > config.slider.min) {
+      total += (sliderValue - config.slider.min) * config.slider.stepPrice;
     }
-    if (addons.contactForm) total += addonPrices.contactForm;
-    if (addons.cms) total += addonPrices.cms;
-    if (addons.languages) total += addonPrices.languages;
-    if (addons.logo) total += addonPrices.logo;
+    
+    config.addons.forEach((addon) => {
+      if (addons[addon.id]) {
+        total += addon.price;
+      }
+    });
+    
     return total;
   };
 
-  const toggleAddon = (key: keyof typeof addons) => {
+  const calculateTotalHours = () => {
+    let totalHours = config.baseHours;
+    const extraSteps = sliderValue - config.slider.min;
+    
+    if (extraSteps > 0) {
+      totalHours += extraSteps * config.slider.stepHours;
+    }
+    
+    config.addons.forEach((addon: any) => {
+      if (addons[addon.id]) {
+        if (addon.hours === "dynamic") {
+          // Dynamic hours: base + 0.5h per extra slider step
+          totalHours += addon.hoursBase + extraSteps * addon.hoursPerSliderStep;
+        } else {
+          totalHours += addon.hours;
+        }
+      }
+    });
+    
+    // Round up if not a whole number
+    return Math.ceil(totalHours);
+  };
+
+  const toggleAddon = (key: string) => {
     setAddons((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
@@ -65,6 +192,7 @@ export default function PricingCalculator() {
   return (
     <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-950 overflow-hidden">
       <motion.div 
+        key={selectedPackage} // Force remount animation when package changes
         className="max-w-5xl mx-auto"
         variants={containerVariants}
         initial="hidden"
@@ -73,10 +201,10 @@ export default function PricingCalculator() {
       >
         <motion.div variants={itemVariants} className="text-center mb-8 sm:mb-10">
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-2">
-            Cât costă site-ul tău?
+            Configurează Prețul pentru {config.title}
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
-            Fiecare proiect este diferit. Acest calculator îți oferă o primă estimare orientativă.
+            Fiecare proiect este diferit. Acest calculator îți oferă o primă estimare orientativă pe baza pachetului ales.
           </p>
         </motion.div>
 
@@ -85,133 +213,110 @@ export default function PricingCalculator() {
           <motion.div variants={itemVariants} className="lg:col-span-5 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:shadow-xl hover:border-blue-500/30 transition-all duration-300 group">
             <div>
               <div className="text-center border-b border-slate-200 dark:border-slate-800 pb-3 mb-4">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Pachet de Bază</h3>
-                <p className="text-slate-500 dark:text-slate-400 text-xs">Fundația fiecărui site (300€)</p>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{config.title}</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-xs">{config.subtitle} ({config.basePrice}€)</p>
               </div>
 
               <div className="space-y-3">
-                <motion.div variants={itemVariants} className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">Design Personalizat</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Adaptat brandului și audienței tale</p>
-                  </div>
-                </motion.div>
-                <motion.div variants={itemVariants} className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">Optimizare Mobile &amp; Desktop</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Responsive pe toate dispozitivele</p>
-                  </div>
-                </motion.div>
-                <motion.div variants={itemVariants} className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">Animații &amp; Interacțiuni</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Interfață fluidă și modernă</p>
-                  </div>
-                </motion.div>
-                <motion.div variants={itemVariants} className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">Viteză de Încărcare &amp; SEO</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Performanță ridicată pe Google</p>
-                  </div>
-                </motion.div>
-                <motion.div variants={itemVariants} className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">Pagini Legale</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Termeni și condiții, GDPR, Cookies</p>
-                  </div>
-                </motion.div>
+                {config.features.map((feature, idx) => (
+                  <motion.div key={idx} variants={itemVariants} className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">{feature.title}</h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{feature.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </motion.div>
 
           {/* Right Column: Customization */}
           <div className="lg:col-span-7 flex flex-col gap-4">
-            {/* Pages Slider */}
+            {/* Pages/Items Slider */}
             <motion.div variants={itemVariants} className="bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 hover:border-blue-500/30 transition-all duration-300">
               <div className="flex justify-between items-center mb-2">
                 <div>
-                  <h4 className="font-bold text-slate-900 dark:text-white text-sm">Număr de Pagini</h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Câte pagini va avea site-ul tău?</p>
+                  <h4 className="font-bold text-slate-900 dark:text-white text-sm">{config.slider.title}</h4>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{config.slider.description}</p>
                 </div>
                 <div className="text-xl font-black text-slate-900 dark:text-white bg-slate-200/60 dark:bg-slate-800 px-3 py-1 rounded-xl shadow-inner">
-                  <AnimatedNumber value={pages} /> {pages === 1 ? "pagină" : "pagini"}
+                  <AnimatedNumber value={sliderValue} /> {sliderValue === 1 ? config.slider.unit : config.slider.unitPlural}
                 </div>
               </div>
               
               <div className="relative pt-1">
                 <input
                   type="range"
-                  min="1"
-                  max="20"
-                  value={pages}
-                  onChange={(e) => setPages(parseInt(e.target.value))}
+                  min={config.slider.min}
+                  max={config.slider.max}
+                  value={sliderValue}
+                  onChange={(e) => setSliderValue(parseInt(e.target.value))}
                   className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg cursor-pointer accent-blue-600 dark:accent-blue-500 focus:outline-none"
                 />
                 <div className="flex justify-between text-[11px] font-semibold text-slate-400 dark:text-slate-500 mt-1.5">
-                  <span>1 (Bază)</span>
-                  <span>+100€ / pagină adiacentă</span>
-                  <span>20 max</span>
+                  <span>{config.slider.footerText[0]}</span>
+                  <span>{config.slider.footerText[1]}</span>
+                  <span>{config.slider.footerText[2]}</span>
                 </div>
               </div>
             </motion.div>
 
             {/* Addons List */}
             <motion.div variants={itemVariants} className="flex flex-col gap-2.5">
-              <AddonCard
-                title="Formular de Contact"
-                description="Trimitere mesaje direct pe email sau WhatsApp."
-                price={addonPrices.contactForm}
-                isSelected={addons.contactForm}
-                onClick={() => toggleAddon("contactForm")}
-              />
-              <AddonCard
-                title="Content Management (Panou Admin)"
-                description="Editezi singur textul și imaginile fără cunoștințe tehnice."
-                price={addonPrices.cms}
-                isSelected={addons.cms}
-                onClick={() => toggleAddon("cms")}
-              />
-              <AddonCard
-                title="Mai Multe Limbi"
-                description="Suport multilingv (ex: Română / Engleză)."
-                price={addonPrices.languages}
-                isSelected={addons.languages}
-                onClick={() => toggleAddon("languages")}
-              />
-              <AddonCard
-                title="Logo &amp; Branding"
-                description="Identitate vizuală completă și logo profesional."
-                price={addonPrices.logo}
-                isSelected={addons.logo}
-                onClick={() => toggleAddon("logo")}
-              />
+              {config.addons.map((addon) => (
+                <AddonCard
+                  key={addon.id}
+                  title={addon.title}
+                  description={addon.desc}
+                  price={addon.price}
+                  isSelected={addons[addon.id]}
+                  onClick={() => toggleAddon(addon.id)}
+                />
+              ))}
             </motion.div>
           </div>
         </div>
 
         {/* Footer / Total Section */}
-        <motion.div variants={itemVariants} className="text-center pt-5 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-baseline gap-2 bg-slate-50 dark:bg-slate-900/50 px-6 py-3 rounded-2xl border border-slate-200 dark:border-slate-800">
-            <span className="text-sm text-slate-500 dark:text-slate-400 font-medium">Preț estimat:</span>
-            <span className="text-xs text-slate-400 dark:text-slate-500">de la</span>
-            <motion.span 
-              className="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 drop-shadow-sm flex items-center"
+        <motion.div variants={itemVariants} className="pt-6 border-t border-slate-200 dark:border-slate-800">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Left: Hours + Price */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
+              {/* Hours */}
+              <div className="flex items-center gap-2.5 bg-slate-50 dark:bg-slate-900/50 px-5 py-3 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <Clock className="w-5 h-5 text-emerald-500 shrink-0" />
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-sm text-slate-500 dark:text-slate-400 font-medium">Timp estimat:</span>
+                  <motion.span className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 flex items-center">
+                    <AnimatedNumber value={calculateTotalHours()} />
+                  </motion.span>
+                  <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">Ore</span>
+                </div>
+              </div>
+              {/* Price */}
+              <div className="flex items-baseline gap-2 bg-slate-50 dark:bg-slate-900/50 px-5 py-3 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <span className="text-sm text-slate-500 dark:text-slate-400 font-medium">Preț estimat:</span>
+                <span className="text-xs text-slate-400 dark:text-slate-500">de la</span>
+                <motion.span 
+                  className="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400 drop-shadow-sm flex items-center"
+                >
+                  <AnimatedNumber value={calculateTotal()} />€
+                </motion.span>
+              </div>
+            </div>
+            
+            {/* Right: CTA */}
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-8 rounded-xl transition-all text-sm shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5"
             >
-              <AnimatedNumber value={calculateTotal()} />€
-            </motion.span>
+              SOLICITĂ O OFERTĂ
+            </Link>
           </div>
-          
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-8 rounded-xl transition-all text-sm shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5"
-          >
-            SOLICITĂ O OFERTĂ
-          </Link>
+          <p className="text-[11px] text-slate-400 dark:text-slate-600 text-center mt-3">
+            * Prețurile și timpii sunt estimativi. Oferta finală va fi stabilită după discuția inițială.
+          </p>
         </motion.div>
       </motion.div>
     </section>

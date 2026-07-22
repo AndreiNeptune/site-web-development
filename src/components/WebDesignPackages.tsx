@@ -4,7 +4,18 @@ import { motion } from "framer-motion";
 import { Check, Shield, Zap, Globe, Smartphone, Search, Rocket } from "lucide-react";
 import Link from "next/link";
 
-export default function WebDesignPackages() {
+import { PackageType } from "./WebDesignPricingSection";
+
+interface Props {
+  selectedPackage: PackageType;
+  onSelectPackage: (pkg: PackageType) => void;
+}
+
+export default function WebDesignPackages({ selectedPackage, onSelectPackage }: Props) {
+  const handleSelect = (pkg: PackageType) => {
+    onSelectPackage(pkg);
+    document.getElementById("calculator-section")?.scrollIntoView({ behavior: "smooth" });
+  };
   const commonFeatures = [
     { icon: <Search className="w-4 h-4 text-emerald-500" />, text: "Optimizat SEO pentru Google" },
     { icon: <Smartphone className="w-4 h-4 text-emerald-500" />, text: "Optimizare Mobile (Responsive design)" },
@@ -46,7 +57,7 @@ export default function WebDesignPackages() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-between shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2"
+            className={`bg-white dark:bg-slate-950 border rounded-3xl p-8 flex flex-col justify-between shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 ${selectedPackage === 'basic' ? 'border-blue-500 ring-2 ring-blue-500 shadow-blue-500/20 dark:border-blue-500' : 'border-slate-200 dark:border-slate-800'}`}
           >
             <div>
               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Prezentare Basic</h3>
@@ -76,9 +87,9 @@ export default function WebDesignPackages() {
               </ul>
             </div>
             
-            <Link href="/contact" className="w-full py-3.5 px-4 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl text-center transition-colors">
-              Solicită Ofertă
-            </Link>
+            <button onClick={() => handleSelect("basic")} className={`w-full py-3.5 px-4 font-bold rounded-xl text-center transition-colors ${selectedPackage === "basic" ? "bg-blue-600 text-white" : "bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white"}`}>
+              {selectedPackage === "basic" ? "Pachet Selectat" : "Configurează Pachetul"}
+            </button>
           </motion.div>
 
           {/* Package 2 - PRO (Top Choice) */}
@@ -87,7 +98,7 @@ export default function WebDesignPackages() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-gradient-to-b from-blue-600 to-indigo-700 rounded-3xl p-8 flex flex-col justify-between shadow-2xl shadow-blue-500/20 hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.5)] transition-all hover:-translate-y-2 relative overflow-hidden group"
+            className={`bg-gradient-to-b from-blue-600 to-indigo-700 rounded-3xl p-8 flex flex-col justify-between shadow-2xl transition-all hover:-translate-y-2 relative overflow-hidden group ${selectedPackage === 'pro' ? 'ring-4 ring-blue-400 ring-offset-2 ring-offset-slate-50 dark:ring-offset-slate-900 shadow-blue-500/40' : 'shadow-blue-500/20 hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.5)]'}`}
           >
             {/* Top Choice Badge */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-950 text-[10px] font-black uppercase tracking-widest py-1 px-4 rounded-b-lg shadow-md">
@@ -134,9 +145,9 @@ export default function WebDesignPackages() {
               </ul>
             </div>
             
-            <Link href="/contact" className="relative z-10 w-full py-3.5 px-4 bg-white hover:bg-slate-50 text-blue-600 font-bold rounded-xl text-center shadow-lg transition-colors">
-              Alege Pachetul PRO
-            </Link>
+            <button onClick={() => handleSelect("pro")} className={`relative z-10 w-full py-3.5 px-4 font-bold rounded-xl text-center shadow-lg transition-colors ${selectedPackage === "pro" ? "bg-blue-100 text-blue-800" : "bg-white hover:bg-slate-50 text-blue-600"}`}>
+              {selectedPackage === "pro" ? "Pachet Selectat" : "Configurează PRO"}
+            </button>
           </motion.div>
 
           {/* Package 3 - Premium / Custom */}
@@ -145,7 +156,7 @@ export default function WebDesignPackages() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-between shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2"
+            className={`bg-white dark:bg-slate-950 border rounded-3xl p-8 flex flex-col justify-between shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 ${selectedPackage === 'custom' ? 'border-blue-500 ring-2 ring-blue-500 shadow-blue-500/20 dark:border-blue-500' : 'border-slate-200 dark:border-slate-800'}`}
           >
             <div>
               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Custom Web App</h3>
@@ -175,9 +186,9 @@ export default function WebDesignPackages() {
               </ul>
             </div>
             
-            <Link href="/contact" className="w-full py-3.5 px-4 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl text-center transition-colors">
-              Discută cu un expert
-            </Link>
+            <button onClick={() => handleSelect("custom")} className={`w-full py-3.5 px-4 font-bold rounded-xl text-center transition-colors ${selectedPackage === "custom" ? "bg-blue-600 text-white" : "bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white"}`}>
+              {selectedPackage === "custom" ? "Pachet Selectat" : "Configurează Custom"}
+            </button>
           </motion.div>
 
         </div>

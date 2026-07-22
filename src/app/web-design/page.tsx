@@ -1,7 +1,6 @@
 import { Metadata } from "next";
-import WebDesignPackages from "@/components/WebDesignPackages";
-import PricingCalculator from "@/components/PricingCalculator";
 import WebDesignFAQ from "@/components/WebDesignFAQ";
+import WebDesignPricingSection from "@/components/WebDesignPricingSection";
 
 export const metadata: Metadata = {
   title: "Creare Site-uri Web și Magazine Online | Omnivo",
@@ -23,13 +22,8 @@ export default function WebDesignPage() {
         </div>
       </section>
 
-      {/* Componenta de Pachete */}
-      <WebDesignPackages />
-
-      {/* Calculator de Pret */}
-      <PricingCalculator />
-
-      {/* Componenta FAQ */}
+      {/* Sectiune Pachete + Calculator */}
+      <WebDesignPricingSection />
       <WebDesignFAQ />
     </main>
   );
