@@ -28,6 +28,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://omnivo.ro"),
   title: "Omnivo | Servicii IT și Web Development",
   description: "Servicii IT complete și web development. Mentenanță și suport tehnic rapid și sigur.",
   keywords: [
@@ -42,16 +43,23 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Omnivo | Servicii IT și Web Development",
     description: "Servicii IT și web development de cea mai înaltă calitate.",
-    url: "https://servicecomputer.ro",
+    url: "https://omnivo.ro",
     siteName: "Omnivo",
     locale: "ro_RO",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Omnivo | Servicii IT și Web Development",
+    description: "Servicii IT și web development de cea mai înaltă calitate.",
   },
   robots: {
     index: true,
     follow: true,
   }
 };
+
+import SmoothScrolling from "@/components/SmoothScrolling";
 
 export default function RootLayout({
   children,
@@ -63,12 +71,12 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "LocalBusiness",
-        "@id": "https://servicecomputer.ro/#organization",
+        "@id": "https://omnivo.ro/#organization",
         "name": "Omnivo",
-        "image": "https://servicecomputer.ro/logo.png",
+        "image": "https://omnivo.ro/logo.png",
         "telephone": "+40770198233",
-        "email": "office@servicecomputer.ro",
-        "url": "https://servicecomputer.ro",
+        "email": "office@omnivo.ro",
+        "url": "https://omnivo.ro",
         "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
@@ -92,10 +100,10 @@ export default function RootLayout({
       },
       {
         "@type": "LocalBusiness",
-        "@id": "https://servicecomputer.ro/#sector2",
+        "@id": "https://omnivo.ro/#sector2",
         "name": "Omnivo - Sector 2",
         "telephone": "+40770198233",
-        "email": "office@servicecomputer.ro",
+        "email": "office@omnivo.ro",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Bulevardul Chișinău nr. 12",
@@ -139,7 +147,6 @@ export default function RootLayout({
     <html
       lang="ro"
       className={cn("h-full bg-white dark:bg-slate-950 antialiased", outfit.variable, "font-sans", geist.variable)}
-      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <head>
@@ -149,22 +156,24 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col font-sans">
-        <PostHogProvider>
-          <PostHogPageView />
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <div className="relative flex min-h-screen flex-col bg-white dark:bg-slate-950">
-              <Navbar />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
-            <CookieBanner />
-            <BackToTop />
-            <StickyMobileCTA />
-            <WhatsAppWidget />
-          </ThemeProvider>
-        </PostHogProvider>
+        <SmoothScrolling>
+          <PostHogProvider>
+            <PostHogPageView />
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+              <div className="relative flex min-h-screen flex-col bg-white dark:bg-slate-950">
+                <Navbar />
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+              <CookieBanner />
+              <BackToTop />
+              <StickyMobileCTA />
+              <WhatsAppWidget />
+            </ThemeProvider>
+          </PostHogProvider>
+        </SmoothScrolling>
       </body>
     </html>
   );

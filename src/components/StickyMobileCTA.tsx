@@ -2,11 +2,41 @@
 
 import { Phone, Calendar, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function StickyMobileCTA() {
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const phoneNumber = "40770198233";
   const message = "Salut! Am o problemă cu laptopul/PC-ul și aș dori o programare.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  useEffect(() => {
+    const handleFocusIn = (e: FocusEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.tagName === "SELECT" ||
+        target.isContentEditable
+      ) {
+        setIsKeyboardOpen(true);
+      }
+    };
+
+    const handleFocusOut = () => {
+      setIsKeyboardOpen(false);
+    };
+
+    window.addEventListener("focusin", handleFocusIn);
+    window.addEventListener("focusout", handleFocusOut);
+
+    return () => {
+      window.removeEventListener("focusin", handleFocusIn);
+      window.removeEventListener("focusout", handleFocusOut);
+    };
+  }, []);
+
+  if (isKeyboardOpen) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 px-3 py-3 md:hidden flex items-center justify-between gap-2 shadow-[0_-8px_30px_rgb(0,0,0,0.12)]">

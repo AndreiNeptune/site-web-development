@@ -50,9 +50,9 @@ export default function Navbar() {
       <div className="hidden md:flex h-9 bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-white/[0.02] transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center justify-between">
           <div className="text-xs font-normal text-slate-600 dark:text-zinc-400 flex items-center space-x-6">
-            <a href="mailto:office@servicecomputer.ro" className="flex items-center space-x-2 hover:text-blue-600 dark:hover:text-white transition-colors duration-200">
+            <a href="mailto:office@omnivo.ro" className="flex items-center space-x-2 hover:text-blue-600 dark:hover:text-white transition-colors duration-200">
               <Mail className="w-3.5 h-3.5" />
-              <span>office@servicecomputer.ro</span>
+              <span>office@omnivo.ro</span>
             </a>
             <a href="tel:0770198233" className="flex items-center space-x-2 hover:text-blue-600 dark:hover:text-white transition-colors duration-200">
               <Phone className="w-3.5 h-3.5" />
