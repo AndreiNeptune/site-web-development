@@ -8,7 +8,7 @@ const getMobileIcon = (label: string) => {
   switch(label) {
     case "Acasă": return <Home className="w-5 h-5 text-slate-500 dark:text-slate-400" />;
     case "Windows": return <MonitorUp className="w-5 h-5 text-pink-500 dark:text-pink-400" />;
-    case "Galerie": return <ImageIcon className="w-5 h-5 text-slate-500 dark:text-slate-400" />;
+    case "Portofoliu": return <ImageIcon className="w-5 h-5 text-slate-500 dark:text-slate-400" />;
     case "Blog": return <FileText className="w-5 h-5 text-slate-500 dark:text-slate-400" />;
     case "Web Design": return <Laptop className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />;
     case "Contact": return <Phone className="w-5 h-5 text-slate-500 dark:text-slate-400" />;
@@ -39,7 +39,7 @@ export default function Navbar() {
     { label: "Acasă", href: "/" },
     { label: "Web Design", href: "/web-design" },
     { label: "Windows", href: "/instalare-windows" },
-    { label: "Galerie", href: "/galerie" },
+    { label: "Portofoliu", href: "/portofoliu" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ];
