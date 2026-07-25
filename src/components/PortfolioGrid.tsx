@@ -24,18 +24,18 @@ export default function PortfolioGrid() {
             onClick={() => setActiveCategory(category)}
             className={`relative px-5 py-2.5 rounded-full text-sm sm:text-base font-semibold transition-colors ${
               activeCategory === category
-                ? "text-black"
-                : "text-zinc-400 hover:text-white hover:bg-white/5"
+                ? "text-white dark:text-black"
+                : "text-zinc-600 dark:text-zinc-400 hover:text-black hover:bg-black/5 dark:hover:text-white dark:hover:bg-white/5"
             }`}
           >
             {activeCategory === category && (
               <motion.div
                 layoutId="active-pill"
-                className="absolute inset-0 bg-white rounded-full -z-10"
+                className="absolute inset-0 bg-black dark:bg-white rounded-full"
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
               />
             )}
-            {category}
+            <span className="relative z-10">{category}</span>
           </button>
         ))}
       </div>

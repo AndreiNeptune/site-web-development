@@ -33,22 +33,41 @@ export default function MacbookMockup({ imageSrc, videoSrc, alt }: MacbookMockup
               src={imageSrc}
               alt={alt}
               fill
+              unoptimized
               className="object-cover object-top"
               sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
             />
           </div>
 
-          {/* Hover Video */}
+          {/* Hover Video / Animated Preview */}
           {videoSrc && (
             <div className={`absolute inset-0 transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`}>
-              <video
-                src={videoSrc}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover object-top"
-              />
+              {videoSrc.endsWith('.webp') || videoSrc.endsWith('.gif') ? (
+                <Image
+                  src={videoSrc}
+                  alt="Website Preview"
+                  fill
+                  unoptimized
+                  className="object-cover object-top"
+                />
+              ) : videoSrc.endsWith('.png') || videoSrc.endsWith('.jpg') ? (
+                <Image
+                  src={videoSrc}
+                  alt="Website Preview"
+                  fill
+                  unoptimized
+                  className={`object-cover transition-all ease-linear ${isHovered ? "object-bottom duration-[15000ms]" : "object-top duration-0"}`}
+                />
+              ) : (
+                <video
+                  src={videoSrc}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover object-top"
+                />
+              )}
             </div>
           )}
 

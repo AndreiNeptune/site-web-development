@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PortfolioPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white selection:bg-blue-500/30">
+    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 selection:bg-blue-500/30 overflow-x-hidden w-full">
       <CustomCursor />
       
       {/* Hero Section */}
@@ -25,7 +25,7 @@ export default function PortfolioPage() {
               Arhitectură de top.
             </span>
           </h1>
-          <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl mx-auto">
             Un showcase al proiectelor digitale pe care le-am construit. De la platforme e-commerce la bloguri medicale optimizate extrem.
           </p>
         </div>
