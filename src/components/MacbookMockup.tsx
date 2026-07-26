@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { PlayCircle } from "lucide-react";
 
 interface MacbookMockupProps {
@@ -13,13 +13,23 @@ interface MacbookMockupProps {
 
 export default function MacbookMockup({ imageSrc, videoSrc, alt }: MacbookMockupProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { amount: 0.5 });
+
+  useEffect(() => {
+    setIsTouchDevice(window.matchMedia("(hover: none)").matches);
+  }, []);
+
+  const active = isTouchDevice ? isInView : isHovered;
 
   return (
     <motion.div
+      ref={ref}
       className="relative w-full max-w-5xl mx-auto group perspective"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ scale: 1.02 }}
+      onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
+      onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
+      whileHover={{ scale: isTouchDevice ? 1 : 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       {/* Screen Container */}
@@ -28,7 +38,7 @@ export default function MacbookMockup({ imageSrc, videoSrc, alt }: MacbookMockup
         {/* Screen Content */}
         <div className="relative w-full h-full bg-black overflow-hidden rounded-sm sm:rounded-md">
           {/* Static Image */}
-          <div className={`absolute inset-0 transition-opacity duration-500 ${isHovered && videoSrc ? "opacity-0" : "opacity-100"}`}>
+          <div className={`absolute inset-0 transition-opacity duration-500 ${active && videoSrc ? "opacity-0" : "opacity-100"}`}>
             <Image
               src={imageSrc}
               alt={alt}
@@ -41,7 +51,7 @@ export default function MacbookMockup({ imageSrc, videoSrc, alt }: MacbookMockup
 
           {/* Hover Video / Animated Preview */}
           {videoSrc && (
-            <div className={`absolute inset-0 transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`}>
+            <div className={`absolute inset-0 transition-opacity duration-500 ${active ? "opacity-100" : "opacity-0"}`}>
               {videoSrc.endsWith('.webp') || videoSrc.endsWith('.gif') ? (
                 <Image
                   src={videoSrc}
@@ -56,7 +66,7 @@ export default function MacbookMockup({ imageSrc, videoSrc, alt }: MacbookMockup
                   alt="Website Preview"
                   fill
                   unoptimized
-                  className={`object-cover transition-all ease-linear ${isHovered ? "object-bottom duration-[15000ms]" : "object-top duration-0"}`}
+                  className={`object-cover transition-all ease-linear ${active ? "object-bottom duration-[15000ms]" : "object-top duration-0"}`}
                 />
               ) : (
                 <video
@@ -72,7 +82,7 @@ export default function MacbookMockup({ imageSrc, videoSrc, alt }: MacbookMockup
           )}
 
           {/* Video Indicator (if it has video but not hovered) */}
-          {videoSrc && !isHovered && (
+          {videoSrc && !active && (
             <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md rounded-full p-2 text-white/80 border border-white/10 shadow-lg">
               <PlayCircle className="w-5 h-5" />
             </div>
