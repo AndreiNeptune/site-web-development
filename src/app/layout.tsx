@@ -29,7 +29,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://omnivo.ro"),
+  metadataBase: new URL("https://omnivoweb.vercel.app"),
   title: "Omnivo | Servicii IT și Web Development",
   description: "Servicii IT complete și web development. Mentenanță și suport tehnic rapid și sigur.",
   keywords: [
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Omnivo | Servicii IT și Web Development",
     description: "Servicii IT și web development de cea mai înaltă calitate.",
-    url: "https://omnivo.ro",
+    url: "https://omnivoweb.vercel.app",
     siteName: "Omnivo",
     locale: "ro_RO",
     type: "website",
@@ -72,12 +72,12 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "LocalBusiness",
-        "@id": "https://omnivo.ro/#organization",
+        "@id": "https://omnivoweb.vercel.app/#organization",
         "name": "Omnivo",
-        "image": "https://omnivo.ro/logo.png",
+        "image": "https://omnivoweb.vercel.app/logo.png",
         "telephone": "+40770198233",
         "email": "office@omnivo.ro",
-        "url": "https://omnivo.ro",
+        "url": "https://omnivoweb.vercel.app",
         "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
@@ -101,7 +101,7 @@ export default function RootLayout({
       },
       {
         "@type": "LocalBusiness",
-        "@id": "https://omnivo.ro/#sector2",
+        "@id": "https://omnivoweb.vercel.app/#sector2",
         "name": "Omnivo - Sector 2",
         "telephone": "+40770198233",
         "email": "office@omnivo.ro",

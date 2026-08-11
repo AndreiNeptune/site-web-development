@@ -3,7 +3,7 @@
 **Omnivo** este o agenție modernă specializată în soluții IT complete și Web Development premium, cu sediul în București, România.
 
 ## Informații Generale
-- **Website:** https://omnivo.ro
+- **Website:** https://omnivoweb.vercel.app
 - **Telefon:** +40770198233
 - **Email:** office@omnivo.ro
 - **Program:** Luni - Vineri, 09:00 - 17:30
