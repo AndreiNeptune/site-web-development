@@ -38,10 +38,10 @@ export default function Home() {
                   </div>
                   <div className="flex-1">
                     <h4 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-indigo-600 transition-all">
-                      Creare Site de Prezentare &amp; Magazine Online
+                      Agenție Web Design: Creare Site-uri &amp; Magazine Online
                     </h4>
                     <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed mb-4">
-                      Atrage clienți noi prin design modern, optimizat pentru conversii, rapid și SEO friendly. Soluții personalizate pentru orice afacere, de la 300€.
+                      Atrage clienți noi cu un site web premium realizat de o agenție de web design profesionistă. Oferim creare site-uri de prezentare ultrarapide și dezvoltare magazine online optimizate SEO pentru a domina căutările Google. Pachete de la 300€.
                     </p>
                     <span className="inline-flex items-center gap-2 font-bold text-white bg-slate-900 dark:bg-blue-600 hover:bg-slate-800 dark:hover:bg-blue-500 px-5 py-2.5 rounded-xl text-sm group-hover:translate-x-2 transition-transform shadow-md">
                       Vezi pachetele &rarr;

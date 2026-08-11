@@ -30,8 +30,11 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://omnivoweb.vercel.app"),
-  title: "Omnivo | Servicii IT și Web Development",
-  description: "Servicii IT complete și web development. Mentenanță și suport tehnic rapid și sigur.",
+  title: "Omnivo | Creare Site Web, Web Design & Servicii IT București",
+  description: "Agenție de web design specializată în creare site-uri de prezentare, magazine online și aplicații web ultrarapide. Optimizare SEO și design premium.",
+  alternates: {
+    canonical: 'https://omnivoweb.vercel.app',
+  },
   keywords: [
     "Servicii IT",
     "Web Development",
@@ -42,8 +45,8 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Omnivo" }],
   openGraph: {
-    title: "Omnivo | Servicii IT și Web Development",
-    description: "Servicii IT și web development de cea mai înaltă calitate.",
+    title: "Omnivo | Creare Site Web, Web Design & Servicii IT",
+    description: "Agenție de web design specializată în creare site-uri de prezentare, magazine online și aplicații web.",
     url: "https://omnivoweb.vercel.app",
     siteName: "Omnivo",
     locale: "ro_RO",
