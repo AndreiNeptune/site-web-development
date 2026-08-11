@@ -3,7 +3,7 @@ import { portfolioData } from '@/data/portfolio'
 import { articles } from '@/data/blog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://omnivo.ro';
+  const baseUrl = 'https://omnivoweb.vercel.app';
 
   // Static routes
   const staticRoutes = [
