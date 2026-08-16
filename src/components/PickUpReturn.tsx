@@ -8,7 +8,7 @@ export default function PickUpReturn() {
     {
       title: "1. Programare",
       desc: "Completează formularul de contact de pe site sau sună-ne direct la numărul dedicat de logistică.",
-      detail: "Telefon: 0770 198 233",
+      detail: "Telefon: 0750 208 299",
       icon: PhoneCall,
     },
     {
@@ -108,10 +108,10 @@ export default function PickUpReturn() {
             Ai nevoie urgenta de preluare? Programează acum la dispecerat:
           </p>
           <a
-            href="tel:0770198233"
+            href="tel:0750208299"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-md hover:shadow-lg transition-all"
           >
-            Suna Logistică: 0770 198 233
+            Suna Logistică: 0750 208 299
           </a>
         </div>
 

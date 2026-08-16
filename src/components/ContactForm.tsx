@@ -168,7 +168,7 @@ export default function ContactForm() {
                 <input
                   type="tel"
                   id="telefon"
-                  placeholder="0770198233"
+                  placeholder="0750208299"
                   disabled={isPending}
                   {...register("telefon")}
                   className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none focus:ring-2 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white transition-all ${

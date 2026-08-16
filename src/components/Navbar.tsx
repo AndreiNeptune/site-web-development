@@ -54,9 +54,9 @@ export default function Navbar() {
               <Mail className="w-3.5 h-3.5" />
               <span>office@omnivo.ro</span>
             </a>
-            <a href="tel:0770198233" className="flex items-center space-x-2 hover:text-blue-600 dark:hover:text-white transition-colors duration-200">
+            <a href="tel:0750208299" className="flex items-center space-x-2 hover:text-blue-600 dark:hover:text-white transition-colors duration-200">
               <Phone className="w-3.5 h-3.5" />
-              <span>+40 770 198 233</span>
+              <span>+40 750 208 299</span>
             </a>
           </div>
           <div className="flex items-center space-x-4 text-slate-600 dark:text-zinc-400">

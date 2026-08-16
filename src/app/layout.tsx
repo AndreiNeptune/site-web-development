@@ -78,7 +78,7 @@ export default function RootLayout({
         "@id": "https://omnivoweb.vercel.app/#organization",
         "name": "Omnivo",
         "image": "https://omnivoweb.vercel.app/logo.png",
-        "telephone": "+40770198233",
+        "telephone": "+40750208299",
         "email": "office@omnivo.ro",
         "url": "https://omnivoweb.vercel.app",
         "priceRange": "$$",
@@ -106,7 +106,7 @@ export default function RootLayout({
         "@type": "LocalBusiness",
         "@id": "https://omnivoweb.vercel.app/#sector2",
         "name": "Omnivo - Sector 2",
-        "telephone": "+40770198233",
+        "telephone": "+40750208299",
         "email": "office@omnivo.ro",
         "address": {
           "@type": "PostalAddress",
