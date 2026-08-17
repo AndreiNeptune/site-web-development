@@ -11,7 +11,7 @@ import CookieBanner from "@/components/CookieBanner";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import PostHogPageView from "@/components/PostHogPageView";
-import { GoogleTagManager } from '@next/third-parties/google';
+import GTMProvider from "@/components/GTMProvider";
 
 const BackToTop = dynamic(() => import("@/components/BackToTop"));
 const WhatsAppWidget = dynamic(() => import("@/components/WhatsAppWidget"));
@@ -153,7 +153,7 @@ export default function RootLayout({
       className={cn("h-full bg-white dark:bg-slate-950 antialiased", outfit.variable, "font-sans", geist.variable)}
       suppressHydrationWarning
     >
-      <GoogleTagManager gtmId="GTM-WG6B94GP" />
+
       <head>
         <script
           type="application/ld+json"
@@ -163,6 +163,7 @@ export default function RootLayout({
       <body className="min-h-full bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col font-sans">
         <SmoothScrolling>
           <PostHogProvider>
+            <GTMProvider />
             <PostHogPageView />
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
               <div className="relative flex min-h-screen flex-col bg-white dark:bg-slate-950">
