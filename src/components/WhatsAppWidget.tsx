@@ -3,7 +3,7 @@
 
 export default function WhatsAppWidget() {
   const phoneNumber = "40750208299";
-  const message = "Salut! Am o problemă cu laptopul/PC-ul și aș dori o programare.";
+  const message = "Salut! Aș dori o ofertă și mai multe detalii despre crearea unui site web.";
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
