@@ -63,7 +63,7 @@ export default function Home() {
                     <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
                       Instalare profesională OS la domiciliu, incluzând drivere, antivirus, optimizare și back-up date. Ne deplasăm noi la tine!
                     </p>
-                    <span className="inline-flex items-center font-bold text-pink-600 dark:text-pink-400 text-sm group-hover:translate-x-2 transition-transform">
+                    <span className="inline-flex items-center font-bold text-pink-700 dark:text-pink-300 text-sm group-hover:translate-x-2 transition-transform">
                       Află mai multe &rarr;
                     </span>
                   </div>
