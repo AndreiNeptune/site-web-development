@@ -79,7 +79,7 @@ export default function RootLayout({
         "name": "Omnivo",
         "image": "https://omnivoweb.vercel.app/logo.png",
         "telephone": "+40750208299",
-        "email": "office@omnivo.ro",
+        "email": "omnivoweb@gmail.com",
         "url": "https://omnivoweb.vercel.app",
         "priceRange": "$$",
         "address": {
@@ -107,7 +107,7 @@ export default function RootLayout({
         "@id": "https://omnivoweb.vercel.app/#sector2",
         "name": "Omnivo - Sector 2",
         "telephone": "+40750208299",
-        "email": "office@omnivo.ro",
+        "email": "omnivoweb@gmail.com",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Bulevardul Chișinău nr. 12",
