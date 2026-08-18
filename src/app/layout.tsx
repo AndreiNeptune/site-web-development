@@ -7,14 +7,10 @@ import Footer from "@/components/Footer";
 import dynamic from "next/dynamic";
 import { cn } from "@/lib/utils";
 
-import CookieBanner from "@/components/CookieBanner";
-import StickyMobileCTA from "@/components/StickyMobileCTA";
-import { PostHogProvider } from "@/components/PostHogProvider";
-import PostHogPageView from "@/components/PostHogPageView";
-import GTMProvider from "@/components/GTMProvider";
-
-const BackToTop = dynamic(() => import("@/components/BackToTop"));
-const WhatsAppWidget = dynamic(() => import("@/components/WhatsAppWidget"));
+const CookieBanner = dynamic(() => import("@/components/CookieBanner"), { ssr: false });
+const StickyMobileCTA = dynamic(() => import("@/components/StickyMobileCTA"), { ssr: false });
+const BackToTop = dynamic(() => import("@/components/BackToTop"), { ssr: false });
+const WhatsAppWidget = dynamic(() => import("@/components/WhatsAppWidget"), { ssr: false });
 
 const geist = Geist({
   subsets: ['latin'],
@@ -64,6 +60,9 @@ export const metadata: Metadata = {
 };
 
 import SmoothScrolling from "@/components/SmoothScrolling";
+import { PostHogProvider } from "@/components/PostHogProvider";
+import PostHogPageView from "@/components/PostHogPageView";
+import GTMProvider from "@/components/GTMProvider";
 
 export default function RootLayout({
   children,
